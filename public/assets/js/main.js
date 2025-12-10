@@ -1,123 +1,41 @@
-jQuery(document).ready(function($) {
-
-    'use strict';
-
-
-        $(".Modern-Slider").slick({
-            autoplay:true,
-            speed:1000,
-            slidesToShow:1,
-            slidesToScroll:1,
-            pauseOnHover:false,
-            dots:true,
-            fade: true,
-            pauseOnDotsHover:true,
-            cssEase:'linear',
-           // fade:true,
-            draggable:false,
-            prevArrow:'<button class="PrevArrow"></button>',
-            nextArrow:'<button class="NextArrow"></button>'
-        });
-
-        $('#nav-toggle').on('click', function (event) {
-            event.preventDefault();
-            $('#main-nav').toggleClass("open");
-        });
-
-
-        $('.tabgroup > div').hide();
-            $('.tabgroup > div:first-of-type').show();
-            $('.tabs a').click(function(e){
-              e.preventDefault();
-                var $this = $(this),
-                tabgroup = '#'+$this.parents('.tabs').data('tabgroup'),
-                others = $this.closest('li').siblings().children('a'),
-                target = $this.attr('href');
-            others.removeClass('active');
-            $this.addClass('active');
-            $(tabgroup).children('div').hide();
-            $(target).show();
-          
-        })
-
-
-
-                $(".box-video").click(function(){
-                    var iframe = $('iframe', this)[0];
-                    if (iframe && iframe.src.indexOf('autoplay=1') === -1) {
-                        iframe.src += (iframe.src.indexOf('?') === -1 ? '?autoplay=1' : '&autoplay=1');
-                    }
-                    $(this).addClass('open');
-                });
-
-        $('.owl-carousel').owlCarousel({
-            loop:true,
-            margin:30,
-            responsiveClass:true,
-            responsive:{
-                0:{
-                    items:1,
-                    nav:true
-                },
-                600:{
-                    items:2,
-                    nav:false
-                },
-                1000:{
-                    items:3,
-                    nav:true,
-                    loop:false
-                }
+// Esperar a que el DOM esté completamente cargado
+document.addEventListener('DOMContentLoaded', function() {
+    // Seleccionar todos los botones de eliminar
+    var deleteButtons = document.querySelectorAll('.btn-delete');
+    
+    // Añadir un event listener a cada botón de eliminar
+    deleteButtons.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            // Prevenir el comportamiento predeterminado del enlace
+            e.preventDefault();
+            
+            // Mostrar un cuadro de diálogo de confirmación
+            if (confirm('¿Estás seguro de que quieres eliminar esta tarea?')) {
+                // Si el usuario confirma, redirigir a la URL de eliminación
+                window.location.href = this.href;
             }
-        })
-
-
-
-        var contentSection = $('.content-section, .main-banner');
-        var navigation = $('nav');
-        
-        //when a nav link is clicked, smooth scroll to the section
-        navigation.on('click', 'a', function(event){
-            event.preventDefault(); //prevents previous event
-            smoothScroll($(this.hash));
         });
-        
-        //update navigation on scroll...
-        $(window).on('scroll', function(){
-            updateNavigation();
-        })
-        //...and when the page starts
-        updateNavigation();
-        
-        /////FUNCTIONS
-        function updateNavigation(){
-            contentSection.each(function(){
-                var sectionName = $(this).attr('id');
-                var navigationMatch = $('nav a[href="#' + sectionName + '"]');
-                if( ($(this).offset().top - $(window).height()/2 < $(window).scrollTop()) &&
-                      ($(this).offset().top + $(this).height() - $(window).height()/2 > $(window).scrollTop()))
-                    {
-                        navigationMatch.addClass('active-section');
+    });
+
+    // Seleccionar todos los botones de alternar
+    var toggleButtons = document.querySelectorAll('.btn-toggle');
+    
+    // Añadir un event listener a cada botón de alternar
+    toggleButtons.forEach(function(button) {
+        button.addEventListener('click', function(e) {
+            // Prevenir el comportamiento predeterminado del enlace
+            e.preventDefault();
+            
+            // Enviar una solicitud AJAX para alternar el estado de la tarea
+            fetch(this.href)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Si la operación fue exitosa, alternar la clase 'completed' en el elemento li padre
+                        this.closest('li').classList.toggle('completed');
                     }
-                else {
-                    navigationMatch.removeClass('active-section');
-                }
-            });
-        }
-        function smoothScroll(target){
-            $('body,html').animate({
-                scrollTop: target.offset().top
-            }, 800);
-        }
-
-
-                $('.button a[href*="#"]').on('click', function(e) {
-                    e.preventDefault();
-                    var target = $($(this).attr('href'));
-                    if (target.length) {
-                        $('html, body').animate({ scrollTop: target.offset().top - 0 }, 500, 'linear');
-                    }
-                });
-
-
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
 });

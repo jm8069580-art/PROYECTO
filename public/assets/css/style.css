@@ -128,6 +128,11 @@ table th {
     font-weight: bold;
 }
 
+table tr {
+    background: white;
+    color: #c0392b;
+}
+
 table tr:hover {
     background: #f8f9fa;
 }

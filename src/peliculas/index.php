@@ -27,6 +27,7 @@ switch ($action) {
             header('Location: ' . BASE_URL . '/peliculas');
             exit;
         }
+        // Vista para crear
         require VIEWS_PATH . 'peliculas/formulario.php';
         break;
 

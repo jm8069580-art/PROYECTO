@@ -7,7 +7,8 @@ error_reporting(E_ALL);
 require_once __DIR__ . '/config.php';
 
 // Por ahora, index.php solo mostrará un “dashboard” estático.
-// Más adelante podremos hacer routing aquí si quieres.
+require_once __DIR__ . '/views/dashboard.php';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,16 +29,14 @@ require_once __DIR__ . '/config.php';
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 
-    <script src="<?php echo BASE_URL; ?>/public/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-
     <style>
         /* Contenedor principal: sidebar + contenido */
         .main-wrapper {
             margin-left: 260px; /* ancho del sidebar del template */
             padding: 40px;
             min-height: 100vh;
-            background-color: #1f1f1f;
-            color: #fff;
+            background-color: white;
+            color: black;
         }
 
         .main-wrapper .section-heading h1,
@@ -136,25 +135,6 @@ require_once __DIR__ . '/config.php';
             <li><a href="#"><i class="fa fa-star"></i></a></li>
         </ul>
     </div>
-
-    <!-- CONTENIDO PRINCIPAL DEL DASHBOARD -->
-    <div class="main-wrapper">
-        <section class="content-section">
-            <div class="section-heading">
-                <h1>Bienvenido a la<br><em>Videoteca</em></h1>
-                <p>Selecciona un módulo en el menú lateral para comenzar.<br>
-                    Por ejemplo, ve a <strong>Películas</strong> para gestionar el catálogo.</p>
-            </div>
-            <div class="section-content">
-                <!-- aquí podrías poner tarjetas/resumenes, estadísticas, etc. -->
-            </div>
-        </section>
-    </div>
-
-    <!-- JS -->
-    <script src="<?php echo BASE_URL; ?>/public/assets/js/vendor/jquery-1.11.2.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/public/assets/js/vendor/bootstrap.min.js"></script>
-    <script src="<?php echo BASE_URL; ?>/public/assets/js/plugins.js"></script>
     <script src="<?php echo BASE_URL; ?>/public/assets/js/main.js"></script>
 </body>
 </html>
