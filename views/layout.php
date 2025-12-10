@@ -63,31 +63,10 @@ require_once __DIR__ . '/../config.php';
                     </a>
                 </li>
                 <li>
-                    <a href="<?php echo BASE_URL; ?>/empleados" class="<?php echo (isset($currentPage) && $currentPage === 'empleados') ? 'selected' : ''; ?>">
-                        <span class="rect"></span>
-                        <span class="circle"></span>
-                        Empleados
-                    </a>
-                </li>
-                <li>
                     <a href="<?php echo BASE_URL; ?>/alquileres" class="<?php echo (isset($currentPage) && $currentPage === 'alquileres') ? 'selected' : ''; ?>">
                         <span class="rect"></span>
                         <span class="circle"></span>
                         Alquileres
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo BASE_URL; ?>/reservas" class="<?php echo (isset($currentPage) && $currentPage === 'reservas') ? 'selected' : ''; ?>">
-                        <span class="rect"></span>
-                        <span class="circle"></span>
-                        Reservas
-                    </a>
-                </li>
-                <li>
-                    <a href="<?php echo BASE_URL; ?>/valoraciones" class="<?php echo (isset($currentPage) && $currentPage === 'valoraciones') ? 'selected' : ''; ?>">
-                        <span class="rect"></span>
-                        <span class="circle"></span>
-                        Valoraciones
                     </a>
                 </li>
             </ul>
